@@ -18,12 +18,13 @@ class NewVisitorTest(LiveServerTestCase):
 	def check_for_row_in_list_table(self,row_text):
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_element_by_tag_name('tr')
-		self.assertIn(row_text, [row.text for row in rows])
+		self.assertIn(row_text, rows.text)
 
 
 
 	def test_tile_contains(self):
-		self.browser.get('http://localhost:8000')
+
+		self.browser.get(self.live_server_url)
 		self.assertIn('To-Do',self.browser.title)
 		header_text = self.browser.find_element_by_tag_name('h1').text
 		self.assertIn('To-Do',header_text)
